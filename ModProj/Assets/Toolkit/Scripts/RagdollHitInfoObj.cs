@@ -9,6 +9,7 @@ namespace CrossLink
     public class RagdollHitInfoObj : MonoBehaviour
     {
         public RagdollHitInfo hitInfo;
+        public string buffToBeAddedInAwake;
     }
 
 }

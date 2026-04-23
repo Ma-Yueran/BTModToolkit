@@ -282,9 +282,11 @@ namespace CrossLink
         public ArmorProfile.ArmorTag[] armorConfigs;
 
         public ArmorProfile.ArmorTag[] armorConfigsRandom;
-        
+
+        [Header("BOSS MODE: Immune to Pushback & Shows hp Bar as boss")]
         public bool disableMotionFeature;
 
+        [Header("Sound")]
         public SoundEffectInfo boneBreakSound;
         public SoundEffectInfo hurtSound;
         public SoundEffectInfo deathSound;
