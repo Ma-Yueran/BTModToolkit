@@ -36,3 +36,12 @@ MonoBehaviour:
   - Elf_DualSword
   - Elf_DualSword_B
   - ElfRogue_Archer
+  memeCharacters:
+  - WarriorFemaleMeMe_Mage
+  - WarriorMaleMeMe_Blade
+  - WarriorMaleMeMe_KatanaGhost_Thunder
+  - WarriorMaleMeMe_Dagger
+  - WarriorMaleMeMe_Sit
+  - WarriorMaleMeMe_Blacksmith
+  - WarriorFemaleMeMe_Archer
+  - WarriorMaleMeMe_BarOwner

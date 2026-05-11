@@ -11,6 +11,7 @@ namespace CrossLink
     public class ReplaceableCharacterConfig : ScriptableObject
     {
         public string[] characters;
+        public string[] memeCharacters;
 
         static ReplaceableCharacterConfig config;
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -376,7 +377,23 @@ namespace CrossLink
 
             for (int i = 0; i < roleModInfo.Length; i++)
             {
-                roleModInfo[i].replaceRole = ReplaceableCharacterConfig.GetConfig().characters;
+                roleModInfo[i].replaceRole = ReplaceableCharacterConfig.GetConfig().characters
+    .Concat(ReplaceableCharacterConfig.GetConfig().memeCharacters)
+    .ToArray();
+            }
+
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        [EasyButtons.Button]
+        public void ReplaceMemeCharactersOnly()
+        {
+            if (roleModInfo == null)
+                return;
+
+            for (int i = 0; i < roleModInfo.Length; i++)
+            {
+                roleModInfo[i].replaceRole = ReplaceableCharacterConfig.GetConfig().memeCharacters;
             }
 
             UnityEditor.EditorUtility.SetDirty(this);

@@ -29,9 +29,8 @@ namespace CrossLink
                 handSlotLeft = new GameObject("LWeapon Point");
                 handSlotLeft.transform.parent = handTransformLeft;
                 handSlotLeft.transform.localPosition = new Vector3(0,0,0);
-                handSlotLeft.transform.localRotation = new Quaternion(0,0,0,0);
+                handSlotLeft.transform.rotation = Quaternion.LookRotation(transform.forward, -transform.right);
                 handSlotLeft.transform.localScale = new Vector3(1,1,1);
-                handSlotLeft.transform.Rotate(new Vector3(0,90,0));
 
                 EditorUtility.SetDirty(this);
             }
@@ -41,9 +40,8 @@ namespace CrossLink
                 handSlotRight = new GameObject("RWeapon Point");
                 handSlotRight.transform.parent = handTransformRight;
                 handSlotRight.transform.localPosition = new Vector3(0,0,0);
-                handSlotRight.transform.localRotation = new Quaternion(0,0,0,0);
+                handSlotRight.transform.rotation = Quaternion.LookRotation(transform.forward, transform.right);
                 handSlotRight.transform.localScale = new Vector3(1,1,1);
-                handSlotRight.transform.Rotate(new Vector3(0,-90,0));
 
                 EditorUtility.SetDirty(this);
             }
@@ -53,7 +51,7 @@ namespace CrossLink
                 shoulderSlotLeft = new GameObject("LWeapon Spine");
                 shoulderSlotLeft.transform.parent = shoulderTransformLeft;
                 shoulderSlotLeft.transform.localPosition = new Vector3(0,0,0);
-                shoulderSlotLeft.transform.localRotation = new Quaternion(0,0,0,0);
+                shoulderSlotLeft.transform.rotation = Quaternion.LookRotation(-transform.up, -transform.right);
                 shoulderSlotLeft.transform.localScale = new Vector3(1,1,1);
                 shoulderSlotLeft.transform.Translate(new Vector3(-0.2f,0,0));
 
@@ -65,7 +63,7 @@ namespace CrossLink
                 shoulderSlotRight = new GameObject("RWeapon Spine");
                 shoulderSlotRight.transform.parent = shoulderTransformRight;
                 shoulderSlotRight.transform.localPosition = new Vector3(0,0,0);
-                shoulderSlotRight.transform.localRotation = new Quaternion(0,0,0,0);
+                shoulderSlotRight.transform.rotation = Quaternion.LookRotation(-transform.up, transform.right);
                 shoulderSlotRight.transform.localScale = new Vector3(1,1,1);
                 shoulderSlotRight.transform.Translate(new Vector3(0.2f,0,0));
 
