@@ -91,6 +91,14 @@ namespace CrossLink
         public List<Renderer> enchantRenderers;
         public bool allowEnchantment = true;
         #endregion
+
+        [EasyButtons.Button]
+        public void SetAsBodyPart()
+        {
+            durability = -1;
+            canPaint = false;
+            allowEnchantment = false;
+        }
     }
 }
 

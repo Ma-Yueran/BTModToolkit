@@ -29,9 +29,8 @@ namespace CrossLink
                 handSlotLeft = new GameObject("LWeapon Point");
                 handSlotLeft.transform.parent = handTransformLeft;
                 handSlotLeft.transform.localPosition = new Vector3(0,0,0);
-                handSlotLeft.transform.localRotation = new Quaternion(0,0,0,0);
+                handSlotLeft.transform.rotation = Quaternion.LookRotation(transform.forward, -transform.right);
                 handSlotLeft.transform.localScale = new Vector3(1,1,1);
-                handSlotLeft.transform.Rotate(new Vector3(0,90,0));
 
                 EditorUtility.SetDirty(this);
             }
@@ -41,19 +40,19 @@ namespace CrossLink
                 handSlotRight = new GameObject("RWeapon Point");
                 handSlotRight.transform.parent = handTransformRight;
                 handSlotRight.transform.localPosition = new Vector3(0,0,0);
-                handSlotRight.transform.localRotation = new Quaternion(0,0,0,0);
+                handSlotRight.transform.rotation = Quaternion.LookRotation(transform.forward, transform.right);
                 handSlotRight.transform.localScale = new Vector3(1,1,1);
-                handSlotRight.transform.Rotate(new Vector3(0,-90,0));
 
                 EditorUtility.SetDirty(this);
             }
 
+            Transform spine = animator.GetBoneTransform(HumanBodyBones.Spine);
             if(!shoulderSlotLeft) {
-                Transform shoulderTransformLeft = animator.GetBoneTransform(HumanBodyBones.LeftShoulder);
+                Transform shoulderTransformLeft = animator.GetBoneTransform(HumanBodyBones.RightShoulder);
                 shoulderSlotLeft = new GameObject("LWeapon Spine");
-                shoulderSlotLeft.transform.parent = shoulderTransformLeft;
-                shoulderSlotLeft.transform.localPosition = new Vector3(0,0,0);
-                shoulderSlotLeft.transform.localRotation = new Quaternion(0,0,0,0);
+                shoulderSlotLeft.transform.parent = spine;
+                shoulderSlotLeft.transform.position = shoulderTransformLeft.position;
+                shoulderSlotLeft.transform.rotation = Quaternion.LookRotation(-transform.up, -transform.right);
                 shoulderSlotLeft.transform.localScale = new Vector3(1,1,1);
                 shoulderSlotLeft.transform.Translate(new Vector3(-0.2f,0,0));
 
@@ -61,11 +60,11 @@ namespace CrossLink
             }
 
             if(!shoulderSlotRight) {
-                Transform shoulderTransformRight = animator.GetBoneTransform(HumanBodyBones.RightShoulder);
+                Transform shoulderTransformRight = animator.GetBoneTransform(HumanBodyBones.Spine);
                 shoulderSlotRight = new GameObject("RWeapon Spine");
-                shoulderSlotRight.transform.parent = shoulderTransformRight;
-                shoulderSlotRight.transform.localPosition = new Vector3(0,0,0);
-                shoulderSlotRight.transform.localRotation = new Quaternion(0,0,0,0);
+                shoulderSlotRight.transform.parent = spine;
+                shoulderSlotRight.transform.localPosition = shoulderTransformRight.position;
+                shoulderSlotRight.transform.rotation = Quaternion.LookRotation(-transform.up, transform.right);
                 shoulderSlotRight.transform.localScale = new Vector3(1,1,1);
                 shoulderSlotRight.transform.Translate(new Vector3(0.2f,0,0));
 
@@ -78,12 +77,14 @@ namespace CrossLink
         }
 
         
-        [Header("Example Role Gizmo")]
+        [Header("Example Gizmo")]
 
         public bool showExampleRoleGizmo = false;
-        public bool showRoleSlotsGizmos = false;
+        public bool showRoleSlotsGizmos = true;
+        public bool showExampleWeaponGizmo = true;
 
         private Mesh mesh;
+        private Mesh weaponMesh;
 
         private void OnDrawGizmos()
         {
@@ -97,13 +98,40 @@ namespace CrossLink
                 Gizmos.DrawWireMesh(mesh, new Vector3(0,0,0), new Quaternion(0,0,0,0).normalized, new Vector3(1f,1f,1f));
             }
 
+
             if(showRoleSlotsGizmos) {
                 if (handSlotLeft) {
-                    Gizmos.DrawWireSphere(handSlotLeft.transform.position, 0.05f);
+
+                    if (showExampleWeaponGizmo)
+                    {
+                        if (!weaponMesh)
+                        {
+                            weaponMesh = AssetDatabase.LoadAssetAtPath<Mesh>($"Assets/Toolkit/Gizmos/Sword.fbx");
+                        }
+
+                        Gizmos.DrawWireMesh(weaponMesh, handSlotLeft.transform.position, handSlotLeft.transform.rotation, new Vector3(100f, 100f, 100f));
+                    }
+                    else
+                    {
+                        Gizmos.DrawWireSphere(handSlotLeft.transform.position, 0.05f);
+                    }
                 }
 
                 if (handSlotRight) {
-                    Gizmos.DrawWireSphere(handSlotRight.transform.position, 0.05f);
+                    if (showExampleWeaponGizmo)
+                    {
+                        if (!weaponMesh)
+                        {
+                            weaponMesh = AssetDatabase.LoadAssetAtPath<Mesh>($"Assets/Toolkit/Gizmos/Sword.fbx");
+                        }
+
+                        Gizmos.DrawWireMesh(weaponMesh, handSlotRight.transform.position, handSlotRight.transform.rotation, new Vector3(100f, 100f, 100f));
+                    }
+                    else
+                    {
+                        Gizmos.DrawWireSphere(handSlotRight.transform.position, 0.05f);
+
+                    }
                 }
 
                 if (shoulderSlotLeft) {

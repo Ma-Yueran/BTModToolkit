@@ -8,7 +8,6 @@ namespace CrossLink
     public class Actor : MonoBehaviour
     {
         public Transform trans => transform;
-        [System.NonSerialized]
         public ActionEditor editor;
 
         Transform target;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -282,9 +283,11 @@ namespace CrossLink
         public ArmorProfile.ArmorTag[] armorConfigs;
 
         public ArmorProfile.ArmorTag[] armorConfigsRandom;
-        
+
+        [Header("BOSS MODE: Immune to Pushback & Shows hp Bar as boss")]
         public bool disableMotionFeature;
 
+        [Header("Sound")]
         public SoundEffectInfo boneBreakSound;
         public SoundEffectInfo hurtSound;
         public SoundEffectInfo deathSound;
@@ -374,7 +377,23 @@ namespace CrossLink
 
             for (int i = 0; i < roleModInfo.Length; i++)
             {
-                roleModInfo[i].replaceRole = ReplaceableCharacterConfig.GetConfig().characters;
+                roleModInfo[i].replaceRole = ReplaceableCharacterConfig.GetConfig().characters
+    .Concat(ReplaceableCharacterConfig.GetConfig().memeCharacters)
+    .ToArray();
+            }
+
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        [EasyButtons.Button]
+        public void ReplaceMemeCharactersOnly()
+        {
+            if (roleModInfo == null)
+                return;
+
+            for (int i = 0; i < roleModInfo.Length; i++)
+            {
+                roleModInfo[i].replaceRole = ReplaceableCharacterConfig.GetConfig().memeCharacters;
             }
 
             UnityEditor.EditorUtility.SetDirty(this);
