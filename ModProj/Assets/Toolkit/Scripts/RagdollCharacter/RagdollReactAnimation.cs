@@ -81,10 +81,26 @@ namespace CrossLink
                     ib = bone.gameObject.AddComponent<InteractBase>();
                 ib.grabDistanceLimit = true;
 
-                GameObject attachGO = Instantiate(prefab, bone);
-                attachGO.name = prefab.name;
+                GameObject attachGO = null;
+                if (ib.attachList != null)
+                {
+                    attachGO = ib.attachList[0].gameObject;
+                }
+                else
+                {
+                    attachGO = Instantiate(prefab, bone);
+                }
+                
                 attachGO.transform.localPosition = Vector3.zero;
-                attachGO.transform.localRotation = Quaternion.identity;
+                if (TryGetBoneConnectionDirection(animator, bones[i], bone, out Vector3 attachLineDirection))
+                {
+                    attachGO.transform.rotation = Quaternion.LookRotation(attachLineDirection, bone.up);
+                }
+                else
+                {
+                    Debug.LogWarning("AttachLinesToAnimatorBones could not determine bone direction for: " + bones[i], bone);
+                    attachGO.transform.localRotation = Quaternion.identity;
+                }
                 attachGO.transform.localScale = Vector3.one;
 
                 AttachObj ao = attachGO.GetComponent<AttachObj>();
@@ -104,6 +120,51 @@ namespace CrossLink
             FindAllInteractBaseAsGrabPoses();
             UnityEditor.EditorUtility.SetDirty(this);
 #endif
+        }
+
+        private static readonly Dictionary<HumanBodyBones, HumanBodyBones> AttachLineLookAtBones = new Dictionary<HumanBodyBones, HumanBodyBones>
+        {
+            { HumanBodyBones.Head, HumanBodyBones.Chest },
+            { HumanBodyBones.Chest, HumanBodyBones.Head },
+            { HumanBodyBones.RightUpperArm, HumanBodyBones.RightLowerArm },
+            { HumanBodyBones.RightLowerArm, HumanBodyBones.RightHand },
+            { HumanBodyBones.LeftUpperArm, HumanBodyBones.LeftLowerArm },
+            { HumanBodyBones.LeftLowerArm, HumanBodyBones.LeftHand },
+            { HumanBodyBones.RightUpperLeg, HumanBodyBones.RightLowerLeg },
+            { HumanBodyBones.RightLowerLeg, HumanBodyBones.RightFoot },
+            { HumanBodyBones.LeftUpperLeg, HumanBodyBones.LeftLowerLeg },
+            { HumanBodyBones.LeftLowerLeg, HumanBodyBones.LeftFoot },
+        };
+
+        private static bool TryGetBoneConnectionDirection(Animator animator, HumanBodyBones sourceBone, Transform sourceTransform, out Vector3 direction)
+        {
+            if (!AttachLineLookAtBones.TryGetValue(sourceBone, out HumanBodyBones targetBone))
+            {
+                direction = Vector3.forward;
+                return false;
+            }
+
+            Transform targetTransform = animator.GetBoneTransform(targetBone);
+            if (targetTransform == null)
+            {
+                direction = Vector3.forward;
+                return false;
+            }
+
+            return TryGetDirection(sourceTransform.position, targetTransform.position, out direction);
+        }
+
+        private static bool TryGetDirection(Vector3 from, Vector3 to, out Vector3 direction)
+        {
+            direction = to - from;
+            if (direction.sqrMagnitude < 0.000001f)
+            {
+                direction = Vector3.forward;
+                return false;
+            }
+
+            direction.Normalize();
+            return true;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace CrossLink
             {
                 actor = gameObject.AddComponent<Actor>();
             }
+            actor.editor = this;
         }
 
         private void Start()

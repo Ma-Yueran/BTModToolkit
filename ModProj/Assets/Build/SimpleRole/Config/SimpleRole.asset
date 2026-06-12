@@ -46,6 +46,13 @@ MonoBehaviour:
     - Elf_DualSword
     - Elf_DualSword_B
     - ElfRogue_Archer
+    - WarriorFemaleMeMe_Mage
+    - WarriorMaleMeMe_Blade
+    - WarriorMaleMeMe_KatanaGhost_Thunder
+    - WarriorMaleMeMe_Dagger
+    - WarriorMaleMeMe_Sit
+    - WarriorMaleMeMe_Blacksmith
+    - WarriorMaleMeMe_BarOwner
     defaultReplacement: 
     weapon: 
     leftWeapon: WMD_Stick
@@ -58,7 +65,7 @@ MonoBehaviour:
     armorProfile: WMD_SimpleArmorProfile
     armorConfigs: 2d010000
     armorConfigsRandom: 
-    disableMotionFeature: 1
+    disableMotionFeature: 0
     boneBreakSound:
       templateName: 
       soundNames: []
@@ -108,6 +115,7 @@ MonoBehaviour:
       volRandomRange: 0
       pitchMax: -1
       pitchMin: 0.8
+    aiPreset: {fileID: 0}
   handPoseInfo: []
   hitInfo: []
   networkPrefabRegister: []

@@ -2035,6 +2035,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3809031233870161568}
+  - component: {fileID: 134137885620935849}
+  - component: {fileID: 8735827002401420078}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -2059,9 +2061,66 @@ Transform:
   - {fileID: 1258288591085412803}
   - {fileID: 1730235946787131193}
   - {fileID: 3680241084745136056}
+  - {fileID: 140377186970244688}
   m_Father: {fileID: 5656389222943239842}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &134137885620935849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6235903321869099131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd9e9a90c1cac54da28e09a39107554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateLibrary:
+    objList: []
+    bindObjList: []
+    needSyncVelocity: 0
+  autoDisappearWhenDurableLow: 1
+  durability: 25
+  interactType: 0
+  guardPoints: []
+  linearForce: 20000
+  linearDamper: 500
+  angularForce: 2000
+  angularDamper: 200
+  singleHandSpeed: 0.6
+  twoHandSpeed: 0.3
+  allowSecondHand: 0
+  beAbleToShowGrab: 1
+  enableAutoTickTwoHand: 0
+  attachList:
+  - {fileID: 7626251693528659433}
+  gaze: {fileID: 0}
+  grabDistanceLimit: 1
+  itemTypes: []
+  mountAttachs: []
+  canPaint: 0
+  enhanceLevel: -1
+  enchantTriggerCols: []
+  enchantRenderers: []
+  allowEnchantment: 0
+--- !u!54 &8735827002401420078
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6235903321869099131}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6237075118322469168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2977,6 +3036,128 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce69df53a8d24bf4e94705046c34c2d8, type: 3}
+--- !u!1001 &2732692408639174075
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3809031233870161568}
+    m_Modifications:
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0521
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0235
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3955728
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5861077
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5861077
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3955728
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 111.968
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492591396037001298, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: selfRB
+      value: 
+      objectReference: {fileID: 8735827002401420078}
+    - target: {fileID: 5492591396037001298, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: interact
+      value: 
+      objectReference: {fileID: 134137885620935849}
+    - target: {fileID: 5492591396037001298, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: indexLimit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492591396037001298, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: lineOffset
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492591396037001298, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: allowTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492591396037001298, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: lineEndPoint
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492591396037001298, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: lineStartPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830968527570335278, guid: e5b98c5f705a399448efb529a8111bdd,
+        type: 3}
+      propertyPath: m_Name
+      value: AttachLine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5b98c5f705a399448efb529a8111bdd, type: 3}
+--- !u!114 &7626251693528659433 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5492591396037001298, guid: e5b98c5f705a399448efb529a8111bdd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2732692408639174075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888349f3ca4e57d4296b2e278cdc5138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &140377186970244688 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2602729886090404843, guid: e5b98c5f705a399448efb529a8111bdd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2732692408639174075}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5501887780779327152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2997,17 +3178,17 @@ PrefabInstance:
     - target: {fileID: 5592570065158795404, guid: e0bd10255f74ce344b52264cfd8d6184,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.2400465
       objectReference: {fileID: 0}
     - target: {fileID: 5592570065158795404, guid: e0bd10255f74ce344b52264cfd8d6184,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5592570065158795404, guid: e0bd10255f74ce344b52264cfd8d6184,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.81188536
       objectReference: {fileID: 0}
     - target: {fileID: 5592570065158795404, guid: e0bd10255f74ce344b52264cfd8d6184,
         type: 3}
@@ -3069,6 +3250,11 @@ PrefabInstance:
       propertyPath: shoulderSlotRight
       value: 
       objectReference: {fileID: 868945449733954635}
+    - target: {fileID: 7269244908201341959, guid: e0bd10255f74ce344b52264cfd8d6184,
+        type: 3}
+      propertyPath: showRoleSlotsGizmos
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0bd10255f74ce344b52264cfd8d6184, type: 3}
 --- !u!4 &127909618200088124 stripped
@@ -3077,6 +3263,296 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5501887780779327152}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1608976489869982217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6489293843984172217, guid: e0bd10255f74ce344b52264cfd8d6184,
+    type: 3}
+  m_PrefabInstance: {fileID: 5501887780779327152}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1398297536194592228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608976489869982217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a5ebf6591cc90478c7d5a2900df112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fragments:
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: ROOT
+    bone: {fileID: 4571908313212085432}
+    cutRadius: 0
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: 0, z: 0}
+    cutPlaneNormal: {x: 0, y: 0, z: 0}
+    cutPlaneBinormal: {x: 0, y: 0, z: 0}
+    BoundsDetails: 0
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 0, y: 0, z: 0}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    SkinnedMeshes:
+    - {fileID: 8337274887394487625}
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 0
+    removeChildAfterDismember: []
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: Head
+    bone: {fileID: 3809031233870161568}
+    cutRadius: 0.25
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: -0.03, z: -0.03}
+    cutPlaneNormal: {x: 0, y: 0.7581, z: 0.44}
+    cutPlaneBinormal: {x: 0, y: 0, z: 1}
+    BoundsDetails: 1
+    Position: {x: -0.00000017593287, y: 0.070153914, z: 0.037303496}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 0.4083849, y: 0.29543346, z: 0.36}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    SkinnedMeshes: []
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 1
+    removeChildAfterDismember: []
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: LeftUpperArm
+    bone: {fileID: 8797623932888964241}
+    cutRadius: 0.25
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: 0.13, z: 0}
+    cutPlaneNormal: {x: 0, y: 0.49, z: 0}
+    cutPlaneBinormal: {x: 0, y: 0, z: 1}
+    BoundsDetails: 1
+    Position: {x: 0.057081398, y: 0.43, z: 0.01}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 0.28, y: 0.64, z: 0.2171732}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    SkinnedMeshes: []
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 1
+    removeChildAfterDismember: []
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: LeftForeArm
+    bone: {fileID: 5122387955777268946}
+    cutRadius: 0.25
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: 0.04, z: 0}
+    cutPlaneNormal: {x: 0, y: 0.49, z: 0}
+    cutPlaneBinormal: {x: 0, y: 0, z: 1}
+    BoundsDetails: 1
+    Position: {x: 0.00049467117, y: 0.23516132, z: 0.03197867}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 0.22, y: 0.47211713, z: 0.19009842}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    SkinnedMeshes: []
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 1
+    removeChildAfterDismember: []
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: RightUpperArm
+    bone: {fileID: 2998236695801474064}
+    cutRadius: 0.25
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: 0.13, z: 0}
+    cutPlaneNormal: {x: 0, y: 0.49, z: 0}
+    cutPlaneBinormal: {x: 0, y: 0, z: 1}
+    BoundsDetails: 1
+    Position: {x: -0.05748216, y: 0.44, z: 0.024617936}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 0.25, y: 0.65, z: 0.1878126}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    SkinnedMeshes: []
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 1
+    removeChildAfterDismember: []
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: RightForeArm
+    bone: {fileID: 2720685630518419757}
+    cutRadius: 0.25
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: 0.04, z: 0}
+    cutPlaneNormal: {x: 0, y: 0.49, z: 0}
+    cutPlaneBinormal: {x: 0, y: 0, z: 1}
+    BoundsDetails: 1
+    Position: {x: -0.0026535746, y: 0.26, z: 0.032296505}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 0.23, y: 0.47, z: 0.25}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    SkinnedMeshes: []
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 1
+    removeChildAfterDismember: []
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: RightCalf
+    bone: {fileID: 5982809727342871495}
+    cutRadius: 0.25
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: 0.04, z: 0}
+    cutPlaneNormal: {x: 0, y: 0.49, z: 0}
+    cutPlaneBinormal: {x: 0, y: 0, z: 1}
+    BoundsDetails: 1
+    Position: {x: -0.012496173, y: 0.31609237, z: 0.085446656}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 0.21, y: 0.6, z: 0.39}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    SkinnedMeshes: []
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 1
+    removeChildAfterDismember: []
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: LeftCalf
+    bone: {fileID: 1339151752540062518}
+    cutRadius: 0.25
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: 0.04, z: 0}
+    cutPlaneNormal: {x: 0, y: 0.49, z: 0}
+    cutPlaneBinormal: {x: 0, y: 0, z: 1}
+    BoundsDetails: 1
+    Position: {x: 0.01390985, y: 0.30390662, z: 0.08383422}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 0.18, y: 0.59, z: 0.39}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    SkinnedMeshes: []
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 1
+    removeChildAfterDismember: []
+  - ShowWireframe: 1
+    ShowProperties: 1
+    Name: Spine2
+    bone: {fileID: 326351820442816014}
+    cutRadius: 0.46
+    cutAngleOnBinormal: 0
+    cutPlanePos: {x: 0, y: -0.03, z: 0}
+    cutPlaneNormal: {x: 0, y: 0.49, z: 0}
+    cutPlaneBinormal: {x: 0, y: 0, z: 1}
+    BoundsDetails: 1
+    Position: {x: -0.0000001248463, y: 0.44, z: 0.034623317}
+    Rotation: {x: 0, y: 0, z: 0}
+    Size: {x: 1.3675859, y: 0.94040155, z: 0.42908725}
+    BoneEffect: {fileID: 0}
+    BoneEffectDetails: 0
+    BoneEffectPosition: {x: 0, y: 0, z: 0}
+    BoneEffectRotation: {x: 0, y: 0, z: 0}
+    BoneEffectSize: {x: 0, y: 0, z: 0}
+    BoneParentEffect: {fileID: 0}
+    BoneParentEffectDetails: 0
+    BoneParentEffectPosition: {x: 0, y: 0, z: 0}
+    BoneParentEffectRotation: {x: 0, y: 0, z: 0}
+    BoneParentEffectSize: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    SkinnedMeshes: []
+    configSkinnedMeshesOnly: 0
+    allowBlowUp: 1
+    removeChildAfterDismember: []
+  ignoreEdgeCreation:
+  - {fileID: 8790896762486224187}
+  ignoreDismember: []
+  skinnedRenderers: []
+--- !u!114 &2362346249003449210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608976489869982217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8142c9894846a54181bae691e465752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dizzyGrabPoses:
+  - {fileID: 134137885620935849}
 --- !u!1001 &7744361298695127373
 PrefabInstance:
   m_ObjectHideFlags: 0

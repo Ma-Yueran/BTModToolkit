@@ -649,6 +649,13 @@ namespace CrossLink
         [Tooltip("Immune to knockout")]
         public bool unknockable = false;
 
+        [Tooltip("Allow this action animation to drive the head. Temporarily disables the head effector while the animation override is active.")]
+        public bool applyHeadAnim = false;
+        [Tooltip("Allow this action animation to drive left finger bones while the animation override is active.")]
+        public bool applyLeftFingerAnim = false;
+        [Tooltip("Allow this action animation to drive right finger bones while the animation override is active.")]
+        public bool applyRightFingerAnim = false;
+
         // scale path
         [Tooltip("Root motion scaling")]
         public float motionScale = 1;
