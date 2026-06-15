@@ -477,6 +477,9 @@ namespace CrossLink
                 SerializedProperty turnSpeedMlpProp = animDataProp.FindPropertyRelative("turnSpeedMlp");
                 SerializedProperty rotateSpeedProp = animDataProp.FindPropertyRelative("rotateSpeed");
                 SerializedProperty unknockableProp = animDataProp.FindPropertyRelative("unknockable");
+                SerializedProperty applyHeadAnimProp = animDataProp.FindPropertyRelative("applyHeadAnim");
+                SerializedProperty applyLeftFingerAnimProp = animDataProp.FindPropertyRelative("applyLeftFingerAnim");
+                SerializedProperty applyRightFingerAnimProp = animDataProp.FindPropertyRelative("applyRightFingerAnim");
                 SerializedProperty motionScaleProp = animDataProp.FindPropertyRelative("motionScale");
                 SerializedProperty trackPosBeginTimeProp = animDataProp.FindPropertyRelative("trackPosBeginTime");
                 SerializedProperty trackPosTimeProp = animDataProp.FindPropertyRelative("trackPosTime");
@@ -519,6 +522,9 @@ namespace CrossLink
                 EditorGUILayout.Space();
 
                 if (unknockableProp != null) EditorGUILayout.PropertyField(unknockableProp);
+                if (applyHeadAnimProp != null) EditorGUILayout.PropertyField(applyHeadAnimProp);
+                if (applyLeftFingerAnimProp != null) EditorGUILayout.PropertyField(applyLeftFingerAnimProp);
+                if (applyRightFingerAnimProp != null) EditorGUILayout.PropertyField(applyRightFingerAnimProp);
                 if (motionScaleProp != null) EditorGUILayout.PropertyField(motionScaleProp);
 
                 if (trackPosBeginTimeProp != null) EditorGUILayout.PropertyField(trackPosBeginTimeProp);
