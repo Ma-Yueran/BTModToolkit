@@ -7,13 +7,17 @@ public class RagdollDismembermentVisualEditor : Editor
 {
     private static readonly HumanBodyBones[] HumanBodyBoneOptions =
         ((HumanBodyBones[])System.Enum.GetValues(typeof(HumanBodyBones)))
-        .Where(bone => (bone == HumanBodyBones.Head || bone == HumanBodyBones.RightUpperArm || bone == HumanBodyBones.RightLowerArm || bone == HumanBodyBones.LeftUpperArm || bone == HumanBodyBones.LeftLowerArm
-        || bone == HumanBodyBones.Chest || bone == HumanBodyBones.RightLowerLeg || bone == HumanBodyBones.LeftLowerLeg))
+        .Where(bone => (bone == HumanBodyBones.Head
+        || bone == HumanBodyBones.Spine || bone == HumanBodyBones.Chest || bone == HumanBodyBones.UpperChest
+        || bone == HumanBodyBones.RightUpperArm || bone == HumanBodyBones.RightLowerArm
+        || bone == HumanBodyBones.LeftUpperArm || bone == HumanBodyBones.LeftLowerArm
+        || bone == HumanBodyBones.RightUpperLeg || bone == HumanBodyBones.RightLowerLeg
+        || bone == HumanBodyBones.LeftUpperLeg || bone == HumanBodyBones.LeftLowerLeg))
         .ToArray();
 
     private static readonly string[] HumanBodyBoneLabels =
         new[] { "None" }
-        .Concat(HumanBodyBoneOptions.Select(bone => bone.ToString()))
+        .Concat(HumanBodyBoneOptions.Select(GetHumanBodyBoneLabel))
         .ToArray();
 
     private static readonly Dictionary<string, HumanBodyBones> HumanBodyBoneSelections =
@@ -712,8 +716,67 @@ public class RagdollDismembermentVisualEditor : Editor
         }
 
         Fragment.FindPropertyRelative("bone").objectReferenceValue = bone;
+
+        string fragmentName;
+        if (TryGetFragmentName(humanBodyBone, out fragmentName))
+        {
+            Fragment.FindPropertyRelative("Name").stringValue = fragmentName;
+        }
+        else
+        {
+            Debug.LogWarning($"Auto Config Bone found bone {humanBodyBone}, but no runtime fragment name mapping exists.", dismember);
+        }
+
         EditorUtility.SetDirty(dismember);
         SceneView.RepaintAll();
+    }
+
+    static bool TryGetFragmentName(HumanBodyBones humanBodyBone, out string fragmentName)
+    {
+        switch (humanBodyBone)
+        {
+            case HumanBodyBones.Head:
+                fragmentName = CrossLink.RagdollBoneInfo.Head;
+                return true;
+            case HumanBodyBones.Spine:
+            case HumanBodyBones.Chest:
+            case HumanBodyBones.UpperChest:
+                fragmentName = CrossLink.RagdollBoneInfo.Spine;
+                return true;
+            case HumanBodyBones.LeftUpperArm:
+                fragmentName = CrossLink.RagdollBoneInfo.LUpArm;
+                return true;
+            case HumanBodyBones.LeftLowerArm:
+                fragmentName = CrossLink.RagdollBoneInfo.LForeArm;
+                return true;
+            case HumanBodyBones.RightUpperArm:
+                fragmentName = CrossLink.RagdollBoneInfo.RUpArm;
+                return true;
+            case HumanBodyBones.RightLowerArm:
+                fragmentName = CrossLink.RagdollBoneInfo.RForeArm;
+                return true;
+            case HumanBodyBones.LeftUpperLeg:
+                fragmentName = CrossLink.RagdollBoneInfo.LThigh;
+                return true;
+            case HumanBodyBones.LeftLowerLeg:
+                fragmentName = CrossLink.RagdollBoneInfo.LCalf;
+                return true;
+            case HumanBodyBones.RightUpperLeg:
+                fragmentName = CrossLink.RagdollBoneInfo.RThigh;
+                return true;
+            case HumanBodyBones.RightLowerLeg:
+                fragmentName = CrossLink.RagdollBoneInfo.RCalf;
+                return true;
+            default:
+                fragmentName = null;
+                return false;
+        }
+    }
+
+    static string GetHumanBodyBoneLabel(HumanBodyBones humanBodyBone)
+    {
+        string fragmentName;
+        return TryGetFragmentName(humanBodyBone, out fragmentName) ? fragmentName : humanBodyBone.ToString();
     }
 
     private void DrawFragmentEffectEditor(SerializedProperty fragment, string name)
