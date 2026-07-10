@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEngine.Rendering;
+#endif
+
 
 namespace CrossLink
 {
@@ -68,16 +73,35 @@ namespace CrossLink
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.forward * (lineStartPoint) + transform.position,
-                transform.forward * (lineEndPoint) + transform.position);
+            Vector3 start = transform.forward * lineStartPoint + transform.position;
+            Vector3 end = transform.forward * lineEndPoint + transform.position;
+
+            Color oldColor = Handles.color;
+            CompareFunction oldZTest = Handles.zTest;
+
+            Handles.zTest = CompareFunction.Always;
+
+            Handles.color = new Color(0f, 0f, 0f, 0.9f);
+            Handles.DrawAAPolyLine(6f, start, end);
+
+            Handles.color = Color.yellow;
+            Handles.DrawAAPolyLine(3f, start, end);
 
             if (lineOffset > 0)
             {
                 //Gizmos.DrawSphere(transform.position + transform.forward * designCallingPos, 0.05f);
 
-                Gizmos.DrawSphere(transform.position, lineOffset);
+                Handles.color = new Color(1f, 0.9f, 0f, 0.25f);
+                Handles.SphereHandleCap(
+                    0,
+                    transform.position,
+                    Quaternion.identity,
+                    lineOffset * 2f,
+                    EventType.Repaint);
             }
+
+            Handles.color = oldColor;
+            Handles.zTest = oldZTest;
         }
 #endif
     }

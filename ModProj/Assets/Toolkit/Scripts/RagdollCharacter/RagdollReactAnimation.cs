@@ -82,7 +82,7 @@ namespace CrossLink
                 ib.grabDistanceLimit = true;
 
                 GameObject attachGO = null;
-                if (ib.attachList != null)
+                if (ib.attachList != null && ib.attachList.Length > 0 && ib.attachList[0] != null)
                 {
                     attachGO = ib.attachList[0].gameObject;
                 }
@@ -91,14 +91,26 @@ namespace CrossLink
                     attachGO = Instantiate(prefab, bone);
                 }
                 
-                attachGO.transform.localPosition = Vector3.zero;
-                if (TryGetBoneConnectionDirection(animator, bones[i], bone, out Vector3 attachLineDirection))
+                AttachLine attachLine = attachGO.GetComponent<AttachLine>();
+                if (attachLine == null)
                 {
+                    Debug.LogError("AttachLinesToAnimatorBones failed: AttachLine component not found on prefab instance.", attachGO);
+                    continue;
+                }
+
+                if (IsLimbBone(bones[i]) && TryGetBoneConnection(animator, bones[i], bone, out Transform targetBone, out Vector3 attachLineDirection, out float boneDistance))
+                {
+                    ConfigureLimbAttachLine(attachLine, bone, targetBone, attachLineDirection, boneDistance);
+                }
+                else if (TryGetBoneConnectionDirection(animator, bones[i], bone, out attachLineDirection))
+                {
+                    attachGO.transform.localPosition = Vector3.zero;
                     attachGO.transform.rotation = Quaternion.LookRotation(attachLineDirection, bone.up);
                 }
                 else
                 {
                     Debug.LogWarning("AttachLinesToAnimatorBones could not determine bone direction for: " + bones[i], bone);
+                    attachGO.transform.localPosition = Vector3.zero;
                     attachGO.transform.localRotation = Quaternion.identity;
                 }
                 attachGO.transform.localScale = Vector3.one;
@@ -135,6 +147,60 @@ namespace CrossLink
             { HumanBodyBones.LeftUpperLeg, HumanBodyBones.LeftLowerLeg },
             { HumanBodyBones.LeftLowerLeg, HumanBodyBones.LeftFoot },
         };
+
+        private static bool IsLimbBone(HumanBodyBones bone)
+        {
+            return bone == HumanBodyBones.RightUpperArm
+                || bone == HumanBodyBones.RightLowerArm
+                || bone == HumanBodyBones.LeftUpperArm
+                || bone == HumanBodyBones.LeftLowerArm
+                || bone == HumanBodyBones.RightUpperLeg
+                || bone == HumanBodyBones.RightLowerLeg
+                || bone == HumanBodyBones.LeftUpperLeg
+                || bone == HumanBodyBones.LeftLowerLeg;
+        }
+
+        private static void ConfigureLimbAttachLine(AttachLine attachLine, Transform sourceBone, Transform targetBone, Vector3 direction, float distance)
+        {
+            Transform attachTransform = attachLine.transform;
+            attachTransform.SetParent(sourceBone, true);
+            attachTransform.position = Vector3.Lerp(sourceBone.position, targetBone.position, 0.5f);
+            attachTransform.rotation = Quaternion.LookRotation(direction, sourceBone.up);
+
+            attachLine.lineStartPoint = distance * 0.4f;
+            attachLine.lineEndPoint = -distance * 0.4f;
+        }
+
+        private static bool TryGetBoneConnection(Animator animator, HumanBodyBones sourceBone, Transform sourceTransform,
+            out Transform targetTransform, out Vector3 direction, out float distance)
+        {
+            targetTransform = null;
+            direction = Vector3.forward;
+            distance = 0f;
+
+            if (!AttachLineLookAtBones.TryGetValue(sourceBone, out HumanBodyBones targetBone))
+            {
+                return false;
+            }
+
+            targetTransform = animator.GetBoneTransform(targetBone);
+            if (targetTransform == null)
+            {
+                return false;
+            }
+
+            direction = targetTransform.position - sourceTransform.position;
+            distance = direction.magnitude;
+            if (distance < 0.000001f)
+            {
+                direction = Vector3.forward;
+                distance = 0f;
+                return false;
+            }
+
+            direction /= distance;
+            return true;
+        }
 
         private static bool TryGetBoneConnectionDirection(Animator animator, HumanBodyBones sourceBone, Transform sourceTransform, out Vector3 direction)
         {
