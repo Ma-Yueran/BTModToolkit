@@ -6,7 +6,7 @@ namespace CrossLink
 {
     public class CleanupContent : ScriptableObject
     {
-        [MenuItem("Tools/Destructive/Cleanup All Content")]
+        //[MenuItem("Tools/Destructive/Cleanup All Content")]
         static void CleanupAllContent()
         {
             var wantsToContinue = EditorUtility.DisplayDialog(

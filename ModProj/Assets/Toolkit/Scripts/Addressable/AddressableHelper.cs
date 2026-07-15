@@ -94,6 +94,9 @@ namespace CrossLink
                     if (name.Contains("OcclusionCullingData"))
                         continue;
 
+                    if (item.Key.Contains("/Config") && IsAIPresetAsset(path))
+                        continue;
+
                     AddressableAssetEntry entry = settings.CreateOrMoveEntry(guids[i], group, readOnly: false, postEvent: false);
                     name = name.Remove(idx, name.Length - idx);
 
@@ -112,6 +115,11 @@ namespace CrossLink
 
         }
 
+        private static bool IsAIPresetAsset(string assetPath)
+        {
+            var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
+            return asset is AIPreset;
+        }
 
         [MenuItem("Tools/Refresh Addressables Only")]
         public static void RefreshAddressables()
@@ -126,11 +134,14 @@ namespace CrossLink
 
                 for (int i = 0; i < guids.Length; i++)
                 {
+                    string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                    if (item.Key.Contains("/Config") && IsAIPresetAsset(path))
+                        continue;
+
                     AddressableAssetEntry entry = settings.FindAssetEntry(guids[i]);
                     if (entry != null)
                     {
                         settings.MoveEntry(entry, group, readOnly: false, postEvent: false);
-                        string path = AssetDatabase.GUIDToAssetPath(guids[i]);
                         string name = path.Replace(item.Key + "/", "");
                         int idx = name.LastIndexOf(".");
                         if (idx < 0)

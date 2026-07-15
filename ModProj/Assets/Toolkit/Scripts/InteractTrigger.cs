@@ -43,6 +43,8 @@ namespace CrossLink
         [Tooltip("don't tick this logic, better performance")]
         public bool dontNeedUpdate = true;
 
+        public AnimationCurve[] curves;
+
         #region Weapon Color
         [Tooltip("which renders will turn colors")]
         public Renderer[] skillChangeColors;
