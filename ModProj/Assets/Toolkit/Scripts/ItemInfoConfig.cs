@@ -459,6 +459,153 @@ namespace CrossLink
             networkPrefabRegister = list.ToArray();
         }
 
+        [EasyButtons.Button]
+        public void AIPresetSetup(GameObject prefab)
+        {
+            if (prefab == null)
+            {
+                Debug.LogWarning("AIPresetSetup failed: prefab is null.");
+                return;
+            }
+
+            if (roleModInfo == null || roleModInfo.Length == 0)
+            {
+                Debug.LogWarning("AIPresetSetup failed: roleModInfo is empty.");
+                return;
+            }
+
+            string prefabPath = AssetDatabase.GetAssetPath(prefab);
+            if (string.IsNullOrEmpty(prefabPath) || !prefabPath.EndsWith(".prefab"))
+            {
+                Debug.LogWarning($"AIPresetSetup failed: {prefab.name} is not a prefab asset.");
+                return;
+            }
+
+            string prefix = AddressableConfig.GetConfig().GetPrefix();
+            RoleModInfo matchedRole = null;
+            int matchedCount = 0;
+            foreach (var item in roleModInfo)
+            {
+                if (item == null || string.IsNullOrEmpty(item.roleName))
+                    continue;
+
+                string roleNameWithoutPrefix = item.roleName.Replace(prefix, string.Empty);
+                if (roleNameWithoutPrefix == prefab.name)
+                {
+                    matchedCount++;
+                    if (matchedRole == null)
+                        matchedRole = item;
+                }
+            }
+
+            if (matchedRole == null)
+            {
+                Debug.LogWarning($"AIPresetSetup failed: no roleModInfo matched prefab {prefab.name}.");
+                return;
+            }
+
+            if (matchedCount > 1)
+            {
+                Debug.LogWarning($"AIPresetSetup found {matchedCount} roleModInfo entries matching prefab {prefab.name}; using the first one.");
+            }
+
+            if (matchedRole.aiPreset == null)
+            {
+                Debug.LogWarning($"AIPresetSetup failed: roleModInfo {matchedRole.roleName} has no aiPreset.");
+                return;
+            }
+
+            GameObject prefabRoot = null;
+            try
+            {
+                prefabRoot = PrefabUtility.LoadPrefabContents(prefabPath);
+                LuaBehaviour luaBehaviour = null;
+                foreach (var lb in prefabRoot.GetComponents<LuaBehaviour>())
+                {
+                    string luaScript = lb.script != null ? lb.script.GetLuaScript() : string.Empty;
+                    if (!string.IsNullOrEmpty(luaScript) && luaScript.Contains("AIPresetLoaderScript"))
+                    {
+                        luaBehaviour = lb;
+                        break;
+                    }
+                }
+
+                if (luaBehaviour == null)
+                    luaBehaviour = prefabRoot.AddComponent<LuaBehaviour>();
+
+                luaBehaviour.script.SetLuaScript(prefix + "AIPresetLoaderScript");
+                SetObjectInjection(luaBehaviour.script, "aiPreset", matchedRole.aiPreset);
+                SetStringInjection(luaBehaviour.script, "name", matchedRole.roleName);
+
+                PrefabUtility.SaveAsPrefabAsset(prefabRoot, prefabPath);
+                Debug.Log($"AIPresetSetup saved {prefabPath} for {matchedRole.roleName}.");
+            }
+            finally
+            {
+                if (prefabRoot != null)
+                    PrefabUtility.UnloadPrefabContents(prefabRoot);
+            }
+        }
+
+        private void SetObjectInjection(LuaScript luaScript, string name, Object value)
+        {
+            List<Injection> objList = luaScript.GetObjList() != null
+                ? luaScript.GetObjList().ToList()
+                : new List<Injection>();
+            int index = FindObjectInjectionIndex(objList, name);
+            if (index < 0)
+            {
+                objList.Add(new Injection { name = name, value = value });
+            }
+            else
+            {
+                objList[index].name = name;
+                objList[index].value = value;
+            }
+
+            luaScript.SetObjList(objList.ToArray());
+        }
+
+        private void SetStringInjection(LuaScript luaScript, string name, string value)
+        {
+            List<InjectionString> stringList = luaScript.GetStringList() != null
+                ? luaScript.GetStringList().ToList()
+                : new List<InjectionString>();
+            int index = FindStringInjectionIndex(stringList, name);
+            if (index < 0)
+            {
+                stringList.Add(new InjectionString { name = name, value = value });
+            }
+            else
+            {
+                stringList[index].name = name;
+                stringList[index].value = value;
+            }
+
+            luaScript.SetStringList(stringList.ToArray());
+        }
+
+        private int FindObjectInjectionIndex(List<Injection> list, string name)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].name == name)
+                    return i;
+            }
+
+            return -1;
+        }
+
+        private int FindStringInjectionIndex(List<InjectionString> list, string name)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].name == name)
+                    return i;
+            }
+
+            return -1;
+        }
 
         [EasyButtons.Button]
         public void AutoAddPrefix()
