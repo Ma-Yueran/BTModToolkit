@@ -1,0 +1,11 @@
+
+local AIPresetLoadTool = {
+    
+}
+
+function AIPresetLoadTool:Awake()
+    local item = CL.RoleDataMgr.GetInfo(self.name)
+    item.aiPreset = self.aiPreset
+end
+
+return Class(nil, nil, AIPresetLoadTool)
